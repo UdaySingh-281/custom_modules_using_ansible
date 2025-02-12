@@ -1,0 +1,24 @@
+---
+- name: Working on Custom Modules
+  hosts: all
+  become: true
+  tasks:
+    - name: Implement Custom module
+      custom_module:
+        name: Uday
+      register: result
+
+    - name: Providing Results
+      debug:
+          msg: "{{ result }}"
+    
+    - name: Installing psutil using python3
+      command: sudo apt install python3-psutil -y
+
+    - name: Computing system info
+      system_info_module:
+      register: system_info
+
+    - name: Providing Insights about System
+      debug:
+        msg: "{{ system_info }}"
